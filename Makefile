@@ -12,5 +12,10 @@ deps:
 	go get github.com/gliderlabs/glu
 	go get -d ./cmd
 
+test-race:
+	go build -race -o ./build/entrykit ./cmd/
+	cd build/ && ln -s ./entrykit ./codep || true && cd ..
+	./build/codep a="echo a" b="echo b"
+	
 release:
 	glu release v$(VERSION)
